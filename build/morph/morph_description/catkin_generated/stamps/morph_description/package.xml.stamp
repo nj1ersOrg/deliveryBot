@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>morph_description</name>
+  <version>0.1.0</version>
+  <description>The morph_description package provides the robot model for the Modular Open Robotics Platform for Hackers project</description>
+  <maintainer email="roaldlemmens@gmail.com">Roald Lemmens</maintainer>
+  <license>GPLv3</license>
+  <url type="website">https://hackaday.io/project/25730-morph-modular-open-robotics-platform-for-hackers</url>
+  <url type="repository">https://github.com/roaldlemmens/morph_description</url>
+  <url type="bugtracker">https://github.com/roaldlemmens/morph_description/issues</url>
+  <author email="roaldlemmens@gmail.com">Roald Lemmens</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <export>
+  </export>
+</package>

@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/serial-test.dir/unix_serial_tests.cc.o  -o /home/nj/morph_ws/devel/lib/serial/serial-test  -L/home/nj/morph_ws/build/gtest -rdynamic ../../../gtest/gtest/libgtest.so /home/nj/morph_ws/devel/lib/libserial.so -lutil -lpthread -lrt -lpthread -Wl,-rpath,/home/nj/morph_ws/build/gtest:/home/nj/morph_ws/build/gtest/gtest:/home/nj/morph_ws/devel/lib 
