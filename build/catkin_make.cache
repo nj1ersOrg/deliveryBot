@@ -1,0 +1,2 @@
+morph/ackermann_msgs:morph/morph_bringup:morph/morph_description:morph/morph_hw:morph/morph_navigation:morph/morph_teleop:morph/serial:morph/vesc/vesc:morph/vesc/vesc_ackermann:morph/vesc/vesc_driver:morph/vesc/vesc_msgs
+-DCATKIN_DEVEL_PREFIX=/home/nj/morph_ws/devel -DCMAKE_INSTALL_PREFIX=/home/nj/morph_ws/install -G Unix Makefiles

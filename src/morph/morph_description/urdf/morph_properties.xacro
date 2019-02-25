@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:property name="bottom_bar_length" value="0.128" /> <!-- total distance between two wheels including some space between the bar and the wheel -->
+  <xacro:property name="top_bar_length" value="0.34" />
+	<xacro:property name="top_bar_offset" value="-0.055" />
+	<xacro:property name="bar_width" value="0.06" />
+	<xacro:property name="wheel_radius" value="0.0825" />
+	<xacro:property name="wheel_width" value="0.060" /> <!-- total width of the wheel, including wheel surface area (actual tire) and hub portion that stands out-->
+	<xacro:property name="wheel_mass" value="5.0" />
+	<xacro:property name="caster_radius" value="0.0575" />
+	<xacro:property name="total_width" value="${wheel_width + bottom_bar_length + wheel_width}" />
+	<xacro:property name="total_heigth" value="${0.115 + back_vertical_beam_hight + t_slot_width + 0.10}" />
+	<xacro:property name="back_vertical_beam_hight" value="0.4" />
+	<xacro:property name="back_horizontal_beam_width" value="0.2" />
+	<xacro:property name="back_beam_px" value="0.05" />
+	<xacro:property name="t_slot_width" value="0.02" />
+	<xacro:property name="kinect_z_offset" value="0.195" />
+	<xacro:property name="ground_clearance" value="0.07" />
+	<xacro:property name="cam_px" value="-${back_beam_px-0.03}" />
+	<xacro:property name="cam_pz" value="${kinect_z_offset + back_vertical_beam_hight + t_slot_width}" />
+	<xacro:property name="cam_or" value="0" />
+	<xacro:property name="cam_op" value="0" />
+	<xacro:property name="cam_oy" value="0" />
+</robot>

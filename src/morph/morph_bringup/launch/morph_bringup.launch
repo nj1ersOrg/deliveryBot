@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- include file="$(find morph_bringup)/launch/gyro.launch" /> -->
+  <!-- <group ns="morph"> -->
+    <!-- Convert an xacro and put on parameter server -->
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find morph_description)/urdf/morph.xacro" />
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find morph_bringup)/config/morph.yaml" command="load"/>
+
+    <!-- Launch robot hardware driver -->
+    <include file="$(find morph_hw)/launch/morph.launch"/>
+
+   	<!-- Load the differential drive controller -->
+      <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" args="mobile_base_controller joint_state_controller">
+      </node>
+
+      <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="100.0" />
+      </node>
+</launch>

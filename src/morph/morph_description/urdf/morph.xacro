@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<robot name="morph" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find morph_description)/urdf/morph_properties.xacro" />
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find morph_description)/urdf/common_properties.xacro" />
+
+  <xacro:include filename="$(find morph_description)/urdf/r200.xacro" />
+  <link name="base_footprint"/>
+  <!--
+     Base link is set at the bottom of the base mould.
+     This is done to be compatible with the way base link
+     was configured for turtlebot 1. Refer to
+
+     https://github.com/turtlebot/turtlebot/issues/40
+
+     To put the base link at the more oft used wheel
+     axis, set the z-distance from the base_footprint
+     to 0.352.
+    -->
+  <joint name="base_joint" type="fixed">
+    <origin xyz="0 0 0.0102" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+  <link name="base_link">
+
+    <collision name="collision">
+      <origin xyz="0 0 ${ground_clearance + 0.5 * total_heigth}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${0.5 * total_width}" length="${total_heigth}"></cylinder>
+      </geometry>
+    </collision>
+
+    <visual name="bottom_bar">
+      <origin xyz="0 0 0.115" rpy="0 0 0" />
+      <geometry>
+        <box size="${bar_width} ${bottom_bar_length} ${t_slot_width}"></box>
+      </geometry>
+    </visual>
+
+    <visual name="top_bar">
+      <origin xyz="${top_bar_offset} 0 0.135" rpy="0 0 -1.57" />
+      <geometry>
+        <box size="${bar_width} ${top_bar_length} ${t_slot_width}"></box>
+      </geometry>
+    </visual>
+
+    <visual name="back__vertical_beam_left">
+      <origin xyz="-${back_beam_px} -${t_slot_width} ${(back_vertical_beam_hight*.5)+0.115+(1.5*t_slot_width)}" rpy="0 0 -1.57" />
+      <geometry>
+        <box size="${t_slot_width} ${t_slot_width} ${back_vertical_beam_hight}"></box>
+      </geometry>
+    </visual>
+    <visual name="back__vertical_beam_right">
+      <origin xyz="-${back_beam_px} ${t_slot_width} ${(back_vertical_beam_hight*.5)+0.115+(1.5*t_slot_width)}" rpy="0 0 -1.57" />
+      <geometry>
+        <box size="${t_slot_width} ${t_slot_width} ${back_vertical_beam_hight}"></box>
+      </geometry>
+    </visual>
+    <visual name="back_horizontal_beam">
+      <origin xyz="-${back_beam_px} 0 ${(back_vertical_beam_hight)+0.115+(2*t_slot_width)}" rpy="0 0 -1.57" />
+      <geometry>
+        <box size="${back_horizontal_beam_width} ${t_slot_width} ${t_slot_width}"></box>
+      </geometry>
+    </visual>
+
+  <collision name="caster_collision_front">
+    <origin xyz="${-0.15 + top_bar_offset} 0 ${caster_radius}" rpy="0 0 0" />
+    <geometry>
+        <sphere radius="${caster_radius}"></sphere>
+    </geometry>
+  </collision>
+
+  <inertial>
+    <mass value="2"/>
+    <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+  </inertial>
+
+  <visual name="caster_visual_front">
+    <origin xyz="${-0.15 + top_bar_offset} 0 ${caster_radius}" rpy="0 0 0"/>
+    <geometry>
+      <sphere radius="${caster_radius}"></sphere>
+    </geometry>
+  </visual>
+
+  <collision name="caster_collision_back">
+    <origin xyz="${0.15 + top_bar_offset} 0 ${caster_radius}" rpy="0 0 0" />
+    <geometry>
+        <sphere radius="${caster_radius}"></sphere>
+    </geometry>
+  </collision>
+
+  <visual name="caster_visual_back">
+    <origin xyz="${0.15 + top_bar_offset} 0 ${caster_radius}" rpy="0 0 0" />
+    <geometry>
+      <sphere radius="${caster_radius}"></sphere>
+    </geometry>
+  </visual>
+  </link>
+
+  <link name="left_wheel">
+    <collision name="collision">
+      <origin xyz="0.0 0 0" rpy="-1.57 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"></cylinder>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin xyz="0.0 0 0" rpy="-1.57 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"></cylinder>
+      </geometry>
+    </visual>
+    <inertial>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="right_wheel">
+    <collision name="collision">
+      <origin xyz="0.0 0 0" rpy="-1.57 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"></cylinder>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin xyz="0.0 0 0" rpy="-1.57 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"></cylinder>
+      </geometry>
+    </visual>
+    <inertial>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+
+  <joint type="continuous" name="left_wheel_joint">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0.0 ${(bottom_bar_length * 0.5) + (0.5 * wheel_width)} ${wheel_radius}" rpy="0 0 0" />
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+  </joint>
+
+
+  <joint type="continuous" name="right_wheel_joint">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0.0 ${(bottom_bar_length * -0.5) - (0.5 * wheel_width)} ${wheel_radius}" rpy="0 0 0" />
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint type="fixed" name="imu_base_joint">
+    <axis xyz="1 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="imu_base" />
+    <origin xyz="0.06 -0.02 0.16" rpy="0 0 0" />
+  </joint>
+
+  <link name="imu_base">
+    <inertial>
+      <mass value="0.001"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>R
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".001 .001 .001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <transmission name="right_wheel_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_wheel_joint">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_wheel_motor">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_wheel_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_wheel_joint">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_wheel_motor">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <sensor_r200 parent="base_link"/>
+</robot>

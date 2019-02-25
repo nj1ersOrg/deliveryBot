@@ -1,0 +1,8 @@
+prefix=/home/nj/morph_ws/install
+
+Name: morph_description
+Description: Description of morph_description
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/nj/morph_ws/install/lib 
+Requires: 
