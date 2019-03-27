@@ -1,8 +1,0 @@
-prefix=/home/nj/morph_ws/install
-
-Name: morph_bringup
-Description: Description of morph_bringup
-Version: 0.1.0
-Cflags: 
-Libs: -L/home/nj/morph_ws/install/lib 
-Requires: 
