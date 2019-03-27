@@ -1,0 +1,28 @@
+[submodule "morph_hw"]
+	path = morph_hw
+	url = https://github.com/ingramator/morph_hw
+[submodule "vesc"]
+	path = vesc
+	url = https://github.com/roaldlemmens/vesc.git
+[submodule "ackermann_msgs"]
+	path = ackermann_msgs
+	url = https://github.com/ros-drivers/ackermann_msgs.git
+[submodule "serial"]
+	path = serial
+	url = https://github.com/wjwwood/serial.git
+[submodule "morph_description"]
+	path = morph_description
+	url = https://github.com/roaldlemmens/morph_description.git
+[submodule "morph_bringup"]
+	path = morph_bringup
+	url = https://github.com/roaldlemmens/morph_bringup.git
+
+[submodule "morph_teleop"]
+	path = morph_teleop
+	url = https://github.com/roaldlemmens/morph_teleop.git
+[submodule "morph_navigation"]
+	path = morph_navigation
+	url = https://github.com/roaldlemmens/morph_navigation.git
+[submodule "morph_design"]
+	path = morph_design
+	url = https://github.com/roaldlemmens/morph_design.git
